@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
+#include "declarations.h"
 
 FILE* file=fopen(fileName,"r");
 if (file == NULL) {

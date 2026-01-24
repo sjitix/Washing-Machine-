@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
+#include "declarations.h"
 
 void error_undefined_variable(void) {
     // after trying to access a variable that hasn't yet been created with MAL
