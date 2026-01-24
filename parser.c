@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "declarations.h"
 
+//might change file open to be in main.c?
 FILE* file=fopen(fileName,"r");
 if (file == NULL) {
     printf("No such file.\n");
