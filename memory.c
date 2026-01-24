@@ -3,6 +3,8 @@
 #include "memory.h"
 
 
+FreeBlock* freelist;
+
 void memory_init()
 {    
 	int Main_Array[100];
@@ -11,8 +13,17 @@ void memory_init()
 
 }
 
+bool var_allocate(char name , int size)
+{
+	int name[size];
+	int start;
+	start = freelist.start;
+
+	Main_Array[start] = nam
+
+	
 
 
-
+}
 
 
