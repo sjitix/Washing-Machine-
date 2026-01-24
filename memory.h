@@ -6,3 +6,9 @@ typedef struct var {
 	int start;
 	int end;
 } var;
+
+typedef struct FreeBlock {
+	int start;
+	int size;
+	struct FreeBlock* next; 
+} FreeBlock;
