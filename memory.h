@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
 
 typedef struct var {
 	char name;
@@ -13,3 +12,9 @@ typedef struct FreeBlock {
 	int size;
 	struct FreeBlock* next; 
 } FreeBlock;
+
+typedef struct Command {
+    char* op;
+    char a;
+    char b;
+} Command;
