@@ -1,7 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "struct.h"
+
 void execute(Command cmd) {
 
 	switch(cmd.op) {
-//VERY WIP!!! switch/command notation is very wrong but actual function workings should be correct assuming the functions that are called also work. -gui
+//VERY WIP!!! switch/command notation isei very wrong but actual function workings should be correct assuming the functions that are called also work. -gui
 		case ASS:
 			//assigns n to the first space of x
 			memory_write(var_get_start(cmd.a),cmd.b);
