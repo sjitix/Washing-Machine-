@@ -15,11 +15,20 @@ void memory_init()
 
 bool var_allocate(char name , int size)
 {
-	int name[size];
-	int start;
-	start = freelist.start;
+	while(freelist != NULL)
+		{
+			if (size >= freelist.size)
+			{
 
-	Main_Array[start] = nam
+			}
+
+			
+
+		}
+
+
+
+
 
 	
 
