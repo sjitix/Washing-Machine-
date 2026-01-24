@@ -1,0 +1,21 @@
+Mal x 6
+Mal y 6
+Ass y 2
+Ass x 4
+Pra x
+Pra y
+Inc x 2
+Inc y 1
+Pra x
+Pra y
+Dec x 0
+Add x y
+Mul x y
+Pra x
+Pra y
+Xor x y
+Pri x 1
+Pra x
+Pra y
+Fre x
+Fre y
