@@ -1,6 +1,5 @@
 
 all:
-	gcc -Wall -pedantic -g <ADD HERE YOUR .c FILES>  -o interpreter
-
+	gcc -Wall -pedantic -g main.c parser.c memory.c executor.c -o interpreter
 
 
