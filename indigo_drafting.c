@@ -30,3 +30,17 @@ case ADD:
     sum = xVal + yVal;
     memory_write(sum, var_get_start(x));
     break;
+
+// executor.c test function
+void test_execute(void) {
+	Command cmd;
+	cmd.op = 
+	cmd.var1 = 
+	cmd.var2 = 
+	execute(cmd);
+	printf("Desired result: \n"); // write in what it's actually supposed to return
+	printf("Actual result: \n", ); // write in whatever it is returning
+	// repeat for all possible cmd.op values
+}
+int main(void) {
+	test_execute
