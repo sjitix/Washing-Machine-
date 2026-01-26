@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "memory.h"
+#include "delarations.h"
 
 
 void memory_init()
