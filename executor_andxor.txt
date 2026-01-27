@@ -1,0 +1,4 @@
+  Mal x 3
+  Mal y 3
+  And x y
+  Xor x y

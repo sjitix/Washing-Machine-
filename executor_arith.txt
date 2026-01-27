@@ -1,0 +1,7 @@
+  Mal x 1
+  Mal y 1
+  Ass x 2
+  Ass y 3
+  Add x y
+  Sub x y
+  Mul x y

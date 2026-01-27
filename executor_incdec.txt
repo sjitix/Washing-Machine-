@@ -1,0 +1,4 @@
+  Mal x 3
+  Ass x 7
+  Inc x 1
+  Dec x 1
