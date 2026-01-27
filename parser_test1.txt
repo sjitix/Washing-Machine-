@@ -1,0 +1,4 @@
+Mal x 6
+Ass x 4
+Add x y
+Fre x
