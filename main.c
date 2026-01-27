@@ -17,6 +17,8 @@ int main(int argc, char ** argv) {
         execute(i);
     }
 
+    free_list();	
+    
     return 0;
 }
 
