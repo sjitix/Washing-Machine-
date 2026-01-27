@@ -272,3 +272,13 @@ int var_get_size(char name)
 {
         return var_table[name].size;
 }
+
+// Frees the linked list
+void free_list(FreeBlock* head) {
+	FreeBlock current = head;
+	while (head != NULL) {
+		current = head;
+		head = head->next;
+		free(current);
+	}
+}
