@@ -1,0 +1,9 @@
+Mal z 3
+Ass z 9
+Inc z 1
+Inc z 1
+Pri z 0
+Pri z 1
+Pra z
+// End of printing program for z
+

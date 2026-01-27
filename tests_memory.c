@@ -35,6 +35,10 @@ void assert_eq_int(int expected, int actual, const char *message) {
 
 // 1) After memory_init + var_allocate, variable exists, size is right, all zeros 
 void test_memory_single_allocation(void) {
+    // This test is checking that making one variable "x" with size 10:
+    // - really starts from a clean slate using memory_init,
+    // - really gives "x" exactly 10 cells,
+    // - and really sets every new cell to 0 instead of some random junk.
     current_test_name = "single alloc makes x with right size + zeros";
     printf("\nRunning: %s\n", current_test_name);
 
@@ -57,6 +61,10 @@ void test_memory_single_allocation(void) {
 
 // 2) Making sure two variables don’t mess each other up
 void test_memory_multiple_allocations_do_not_overlap(void) {
+    // This test is checking that when we have two variables "a" and "b":
+    // - both can be created at the same time,
+    // - each one can hold its own simple pattern of numbers,
+    // - writing into "a" does not secretly change "b", and the other way round.
     current_test_name = "two vars keep their own values";
     printf("\nRunning: %s\n", current_test_name);
 
@@ -91,6 +99,10 @@ void test_memory_multiple_allocations_do_not_overlap(void) {
 
 // 3) Freeing and reallocating reuses space
 void test_memory_free_and_reallocate_same_size(void) {
+    // This test is checking that when we:
+    // - create "x" of size 8 and then free it,
+    // - we can later create "y" of the same size,
+    // - and "y" behaves like a normal fresh variable where we can write and read values.
     current_test_name = "free x then reuse same size for y";
     printf("\nRunning: %s\n", current_test_name);
 
@@ -129,6 +141,10 @@ void test_memory_free_and_reallocate_same_size(void) {
 
 // 4) var_exists and var_get basic behavior 
 void test_memory_var_exists_and_get(void) {
+    // This test is checking that the helper functions around names work:
+    // - before we create "z", var_exists('z') is false and var_get('z') gives NULL,
+    // - after we allocate "z", both say "z is here" and give back a real pointer,
+    // - after we free "z", both go back to "z is not here" again.
     current_test_name = "var_exists + var_get behave before/after alloc + free";
     printf("\nRunning: %s\n", current_test_name);
 
@@ -158,6 +174,11 @@ void test_memory_var_exists_and_get(void) {
 
 // 5) make sure free_list doesn't totally break things
 void test_memory_free_list_allows_reinit(void) {
+    // This test is checking the more hidden clean up code:
+    // - we create and free "a" and "b" so there are some free blocks,
+    // - we call free_list() which should throw away that internal free list,
+    // - we then call memory_init() and allocate "c",
+    // - if that works, it means free_list did not poison things and we can safely start over.
     current_test_name = "free_list nukes freelist but we can start over";
     printf("\nRunning: %s\n", current_test_name);
 

@@ -1,0 +1,14 @@
+Mal x 3
+Ass x 1
+Inc x 1
+Inc x 1
+Dec x 1
+Mal y 3
+Ass y 4
+Add x y
+Sub x y
+Mul x y
+Fre y
+Fre x
+// End of basic life cycle program for x and y
+
