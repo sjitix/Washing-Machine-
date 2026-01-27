@@ -19,7 +19,7 @@ void var_write_at(Variable v, int index, int value);
 
 int var_size(Variable v);
 
-/* EFFECT: Frees the memory*/ 
+/* EFFECT: Frees the memory */ 
 void free_list(void);
 
 #endif

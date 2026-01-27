@@ -20,7 +20,7 @@ FreeBlock* freelist;
 
 struct internalVar var_table[256];
 
-void memory_init()
+void memory_init(void)
 {
 	freelist = malloc ( sizeof(struct FreeBlock));
 	//initially the whole list is one free block
