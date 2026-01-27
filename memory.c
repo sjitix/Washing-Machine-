@@ -221,3 +221,12 @@ int var_size(Variable v)
 {
         return v->size;
 }
+
+void free_list(void) {
+	FreeBlock current = freelist;
+	while (freelist != NULL) {
+		current = freelist;
+		freelist = freelist->next;
+		free(current);
+	}
+}
