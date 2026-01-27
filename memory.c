@@ -93,13 +93,13 @@ int var_allocate(char name , int size)
                                 if(previous == NULL)
                                 {
                                         freelist = current -> next;
-                                     //   free(current);
+                                       free(current);
                                 }
                                 //case2: its not first node in freelist
                                 else
                                 {
                                         previous -> next = current -> next;
-                                     //   free(current);
+                                        free(current);
                                 }
                         }
                         //size of node is bigger -> truncate the node
@@ -124,7 +124,7 @@ int var_allocate(char name , int size)
                         var_table[name].size = size;
                         var_table[name].name = name;
 
-                        free(current);
+
 
                         return 1;
                 }
@@ -154,11 +154,11 @@ int var_free(char name)
         previous = NULL;
 
         //set new free node in the list based on the freed variable
-        new_free_node -> start  = var_table[(int)name].start;
-        new_free_node -> size = var_table[(int)name].size;
+        new_free_node -> start  = var_table[name].start;
+        new_free_node -> size = var_table[name].size;
 
         //variable doesnt exist
-        var_table[(int)name].start = -1;
+        var_table[name].start = -1;
 
         // if freelist is empty already
         if (freelist == NULL)
