@@ -187,10 +187,10 @@ int var_free(char name)
 
         //if no suitable space has been found
         //put it at the end of the empty list
-        previous -> next = new_free_node;
-        new_free_node -> next = NULL;
+       // previous -> next = new_free_node;
+       // new_free_node -> next = NULL;
         //merge freespaces
-        coalesce(previous, new_free_node);
+       // coalesce(previous, new_free_node);
 
         return 1;
 }

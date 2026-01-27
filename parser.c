@@ -7,9 +7,9 @@ struct internalCommand {
     char var1;
     char var2;
     int number;
-};
+}commands[100];
 
-static struct internalCommand commands[100];
+
 
 Command get_command(int index)
 {
