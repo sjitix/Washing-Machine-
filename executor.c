@@ -20,8 +20,7 @@ void execute(int index) {
 			break;
 
 		case INC:
-			if(v1 == NULL)
-					error_undefined_variable();
+			//errors
 			if(cmd_get_number(cmd) < 0 || cmd_get_number(cmd) >= var_size(v1))
 					error_wrong_memory();
 			//writes in the nth space denoted by x,the same number add 1
@@ -34,12 +33,16 @@ void execute(int index) {
 			break;
 
 		case MAL:
+			//allocates memory using variable memory allocation function
 			result = var_allocate(cmd_get_var1(cmd), cmd_get_number(cmd));
 			if (result == 0)
 				error_out_of_memory();
 			break;
 
 		case PRI:
+			//errors
+			if(cmd_get_number(cmd) < 0 || cmd_get_number(cmd) >= var_size(v1))
+					error_wrong_memory();
 			//reads the nth space denoted by x and prints it
 			printf("%d\n", var_read_at(v1, cmd_get_number(cmd)));
 			break;
@@ -60,6 +63,9 @@ void execute(int index) {
 			break;
 
 		case AND:
+			//errors
+			if(var_size(v1)!=var_size(v2))
+				error_diff_length();
 			//overwriting each element of x[i] with the value of (x[i]*y[i]%2)
 			for (i = 0; i < var_size(v1); i++) {
 				var_write_at(v1, i, (var_read_at(v1, i) * var_read_at(v2, i)) % 2);
@@ -67,6 +73,9 @@ void execute(int index) {
 			break;
 
 		case XOR:
+			//errors
+			if(var_size(v1)!=var_size(v2))
+				error_diff_length();
 			//overwriting each element of x[i] with the value of (x[i]+y[i]%2)
 			for (i = 0; i < var_size(v1); i++) {
 				var_write_at(v1, i, (var_read_at(v1, i) + var_read_at(v2, i)) % 2);

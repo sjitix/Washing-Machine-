@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "memory.h"
+#include "errors.h"
 
 int Main_Array[100];
 
