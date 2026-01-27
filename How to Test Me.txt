@@ -1,0 +1,138 @@
+HOW YOU SHOULD TEST OUR INTERPRETER
+
+1. What Are We Trying To Do?
+
+We want to check that the interpreter behaves as the assignment describes, and that changes do not secretly break anything.
+
+We do this by writing small C programs (tests). Each test:
+- prepares a situation,
+- calls one function from our code,
+- checks that the result is what we expect.
+
+We mainly test:
+- memory.c / memory.h – how the 100 memory cells and variables are managed,
+- parser.c / parser.h – how we read the program file into internal commands,
+- executor.c / executor.h – how each command (Mal, Ass, Inc, etc.) is run.
+
+2. How The Tests Are Organized
+
+We keep test code in separate C files:
+
+- tests_memory.c – tests for memory (allocating, freeing, reading, writing),
+- tests_parser.c – tests for parsing the mini-language files,
+- tests_executor.c – tests for executing individual commands,
+- tests_integration.c – a few “full program” tests.
+
+There is also one main test file:
+
+- tests_main.c – runs all of the tests and prints how many passed and failed.
+
+The main test program idea:
+
+- It calls: run_memory_tests(), run_parser_tests(), run_executor_tests(), run_integration_tests().
+- It tracks how many tests passed and failed.
+- It returns 0 if all tests pass, 1 if any test fails.
+
+3. How A Single Test Works
+
+All tests follow three steps:
+
+1) Prepare:
+   For example, call memory_init(), allocate a variable, write some values.
+
+2) Do something:
+   Call the function you want to test, for example var_allocate, parse, or execute.
+
+3) Check:
+   Use simple if statements and helper functions to check that the result is correct.
+   If something is wrong, print a message and mark the test as failed.
+
+We define a few helper functions (assertions) such as:
+- assert_equal_int(expected, actual, message),
+- assert_true(condition, message).
+
+Each test function calls these helpers.
+
+4. What We Test In Each Part
+
+4.1 Memory (memory.c)
+
+We test that:
+- After memory_init() and var_allocate('x', 10), x exists, has size 10, and its cells are all 0.
+- Multiple variables do not overlap: writing to one does not change the other.
+- Freeing and reusing works: after freeing x, another variable of the same size can be allocated and used.
+- var_exists(name) and var_get(name) behave correctly before and after allocation and freeing.
+
+4.2 Parser (parser.c)
+
+We keep small program files in a folder, for example:
+Mal x 6
+Ass x 4
+Inc x 2
+Pra x
+
+We test that:
+- parse("filename") returns the correct number of commands.
+- For each command, get_command(i) has:
+  - the right operation (Mal, Ass, Inc, etc. as enums),
+  - the right variable names,
+  - the right number when there is a numeric parameter.
+
+We do this for all command types and also for a longer example program.
+
+4.3 Executor (executor.c)
+
+We test what happens when commands are executed:
+
+- For Ass: after Ass x 5, the first cell of x is 5.
+- For Inc and Dec: a chosen cell increases or decreases by 1.
+- For Mal: after Mal x 4, x exists, has size 4, and all cells are 0.
+- For Add, Sub, Mul: x[0] is updated according to the operation and y[0].
+- For And and Xor: with arrays of the same length, x[i] becomes:
+  - And: (x[i] * y[i]) % 2,
+  - Xor: (x[i] + y[i]) % 2.
+- For Fre: after Fre x, x no longer exists (var_exists returns false).
+
+We usually:
+- call memory_init(),
+- parse a tiny file with 1–3 commands,
+- call execute(index),
+- check the variables with var_get, var_read_at, var_size.
+
+5. End-to-End Tests (Optional)
+
+End-to-end tests run the whole interpreter on real program files.
+
+Example:
+- Use a program similar to the example in the assignment.
+- Run "./interpreter program.txt".
+- Check that it does not crash and that its printed output is what we expect.
+
+6. How To Run The Tests
+
+We add a "tests" target to the Makefile that:
+- compiles the normal source files plus all tests_*.c files,
+- produces an executable called "tests".
+
+Then we run:
+- make tests
+- ./tests
+
+The program prints how many tests passed and how many failed.
+
+7. How New People Should Use The Tests
+
+Whenever you work on the project:
+
+1) Before changing anything:
+   - Run the tests and make sure they all pass.
+
+2) Make your change in one of the modules.
+
+3) Add or update at least one test that checks the new or changed behavior.
+
+4) Run the tests again and make sure they all pass.
+
+If you add a new command to the language:
+- update the parser and executor code,
+- add a parser test, an executor test, and optionally include the new command in one of the small end-to-end programs.
