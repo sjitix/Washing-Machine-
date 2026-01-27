@@ -1,50 +1,39 @@
-// TO DO: replace "file" with actual file name?
-
 #include <stdio.h>
 #include <string.h>
 #include "parser.h"
 
-
-/*FILE* file=fopen(fileName,"r");
-if (file == NULL) {
-    printf("No such file.\n");
-    return 0;
-}
-
-Command cmd;
-while (fscanf(file,"%p %c %c", cmd.op, cmd.a, cmd.b) == 1)
-    execute(cmd);
-
-fclose(file);*/
-
-
-typedef struct Command {
+struct internalCommand {
     int op;
     char var1;
     char var2;
-
     int number;
-} Command;
+};
 
-static Command commands[100];
+static struct internalCommand commands[100];
 
-int get_cmd_op(int index)
+Command get_command(int index)
 {
-    return commands[index].op;
+    return &commands[index];
 }
 
-char get_cmd_var1(int index)
+int cmd_get_op(Command cmd)
 {
-    return commands[index].var1;
-}
-char get_cmd_var2(int index)
-{
-    return commands[index].var2;
+    return cmd->op;
 }
 
-int get_cmd_number(int index)
+char cmd_get_var1(Command cmd)
 {
-    return commands[index].number;
+    return cmd->var1;
+}
+
+char cmd_get_var2(Command cmd)
+{
+    return cmd->var2;
+}
+
+int cmd_get_number(Command cmd)
+{
+    return cmd->number;
 }
 
 int parse (const char * filename)
@@ -120,18 +109,10 @@ int parse (const char * filename)
             fscanf(file, " %c", &commands[count].var1);
         }
 
-
-
         count ++;
     }
 
     fclose(file);
 
     return count;
-
-
-
-
-
-
 }

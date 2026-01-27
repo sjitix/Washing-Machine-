@@ -14,20 +14,18 @@
 #define FRE 10
 #define PRA 11
 
+typedef struct internalCommand * Command;
 
+int parse(const char * filename);
 
-int parse(const char * filename );
+Command get_command(int index);
 
-//Getters for executor to use
+int cmd_get_op(Command cmd);
 
-int get_cmd_op(int index);
+char cmd_get_var1(Command cmd);
 
-char get_cmd_var1(int index);
+char cmd_get_var2(Command cmd);
 
-char get_cmd_var2(int index);
-
-int get_cmd_number(int index);
-
-
+int cmd_get_number(Command cmd);
 
 #endif
