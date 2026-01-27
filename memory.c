@@ -223,7 +223,7 @@ int var_size(Variable v)
 }
 
 void free_list(void) {
-	FreeBlock current = freelist;
+	FreeBlock* current = freelist;
 	while (freelist != NULL) {
 		current = freelist;
 		freelist = freelist->next;
