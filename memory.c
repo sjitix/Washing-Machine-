@@ -7,6 +7,7 @@ int Main_Array[100];
 struct internalVar {
 	int start;
 	int size;
+        char name;
 };
 
 typedef struct FreeBlock {
@@ -20,7 +21,7 @@ FreeBlock* freelist;
 
 struct internalVar var_table[256];
 
-void memory_init(void)
+void memory_init()
 {
 	freelist = malloc ( sizeof(struct FreeBlock));
 	//initially the whole list is one free block
@@ -64,6 +65,9 @@ void coalesce (FreeBlock *  previous , FreeBlock * new_node)
 
 int var_allocate(char name , int size)
 {
+
+        if ( size <= 0) error_wrong_memory();
+
         FreeBlock * current;
         FreeBlock * previous;
 
@@ -89,13 +93,13 @@ int var_allocate(char name , int size)
                                 if(previous == NULL)
                                 {
                                         freelist = current -> next;
-                                        free(current);
+                                     //   free(current);
                                 }
                                 //case2: its not first node in freelist
                                 else
                                 {
                                         previous -> next = current -> next;
-                                        free(current);
+                                     //   free(current);
                                 }
                         }
                         //size of node is bigger -> truncate the node
@@ -105,6 +109,8 @@ int var_allocate(char name , int size)
                                 current -> start = current -> start + size;
                                 //substract to have remaining space in the node
                                 current -> size = current -> size - size;
+
+                               // free(current);
                         }
 
                         //initialize with 0 - the actual alocation
@@ -116,6 +122,9 @@ int var_allocate(char name , int size)
                         //update variables
                         var_table[name].start = start_free_node;
                         var_table[name].size = size;
+                        var_table[name].name = name;
+
+                        free(current);
 
                         return 1;
                 }
@@ -124,6 +133,8 @@ int var_allocate(char name , int size)
                 current = current -> next;
         }
 
+
+        error_out_of_memory();
         return 0;
 }
 
@@ -132,7 +143,7 @@ int var_free(char name)
         FreeBlock * new_free_node;
 
         //if the variable already doesnt exist , cannot free it
-        if(var_table[name].start == -1) return 0;
+        if(var_table[name].start == -1) error_undefined_variable();
 
         new_free_node = malloc (sizeof(struct FreeBlock));
 
@@ -155,7 +166,7 @@ int var_free(char name)
                 //insert at head
                 new_free_node -> next = NULL;
                 freelist = new_free_node;
-                coalesce(previous , new_free_node);
+
                 return 1;
         }
 
@@ -185,12 +196,16 @@ int var_free(char name)
                 current = current -> next;
         }
 
-        //if no suitable space has been found
+      //if no suitable space has been found
         //put it at the end of the empty list
-       // previous -> next = new_free_node;
-       // new_free_node -> next = NULL;
+
+        previous -> next = new_free_node;
+
+        new_free_node -> next = NULL;
+
         //merge freespaces
-       // coalesce(previous, new_free_node);
+        coalesce(previous, new_free_node);
+
 
         return 1;
 }
@@ -209,24 +224,17 @@ Variable var_get(char name)
 
 int var_read_at(Variable v, int index)
 {
+        if (v == NULL || !var_exists(v->name)) error_undefined_variable();
         return Main_Array[v->start + index];
 }
 
 void var_write_at(Variable v, int index, int value)
 {
+        if (v == NULL || !var_exists(v->name)) error_undefined_variable();
         Main_Array[v->start + index] = value;
 }
 
 int var_size(Variable v)
 {
         return v->size;
-}
-
-void free_list(void) {
-	FreeBlock* current = freelist;
-	while (freelist != NULL) {
-		current = freelist;
-		freelist = freelist->next;
-		free(current);
-	}
 }
