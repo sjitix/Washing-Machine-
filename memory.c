@@ -111,7 +111,7 @@ int var_allocate(char name , int size)
                                 //substract to have remaining space in the node
                                 current -> size = current -> size - size;
 
-                               free(current);
+                               //free(current);
                         }
 
                         //initialize with 0 - the actual alocation
