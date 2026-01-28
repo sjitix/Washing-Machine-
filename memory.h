@@ -1,25 +1,22 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-typedef struct internalVar * Variable;
 
-void memory_init(void);
 
-Variable var_get(char name);
+//Memory Manager ADT
+typedef struct  MemoryManager *  memoryManager;
 
-int var_allocate(char name, int size);
 
-int var_free(char name);
+memoryManager memory_create(void);
 
-int var_exists(char name);
+int mem_allocate(memoryManager memory , int size);
 
-int var_read_at(Variable v, int index);
+void mem_free(memoryManager memory ,int start , int size);
 
-void var_write_at(Variable v, int index, int value);
 
-int var_size(Variable v);
 
-/* EFFECT: Frees the memory */ 
-void free_list(void);
+
+
+void free_list(memoryManager memory);
 
 #endif
