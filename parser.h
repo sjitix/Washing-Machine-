@@ -14,6 +14,8 @@
 #define FRE 10
 #define PRA 11
 
+
+
 typedef struct internalCommand * Command;
 
 int parse(const char * filename);

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "memory.h"
-
+#include "variables.h"
 #include "parser.h"
 #include "executor.h"
 
@@ -8,8 +8,9 @@
 
 int main(int argc, char ** argv) {
 
-
-    memory_init();
+    memoryManager memory = memory_create();
+    
+    var_init(memory);
 
     int count = parse(argv[1]);
 
@@ -17,7 +18,7 @@ int main(int argc, char ** argv) {
         execute(i);
     }
 
-    free_list();	
+    free_all_lists(memory);	
     
     return 0;
 }

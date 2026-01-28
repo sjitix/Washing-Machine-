@@ -3,6 +3,7 @@
 #include "parser.h"
 #include "memory.h"
 #include "errors.h"
+#include "variables.h"
 
 void execute(int index) {
 	int i;

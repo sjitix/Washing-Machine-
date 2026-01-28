@@ -1,7 +1,8 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-
+//were including memory.h to get the type memory MANAGER
+#include "memory.h"
 
 
 
@@ -10,7 +11,7 @@
 typedef struct internalVar * Variable;
 
 
-
+void var_init (memoryManager memory);
 
 Variable var_get(char name);
 
