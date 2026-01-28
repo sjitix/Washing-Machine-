@@ -11,8 +11,6 @@ int main(int argc, char ** argv) {
 
     memory_init();
 
-    int count = parse(argv[1]);
-
     for (int i = 0; i < count; i++) {
         execute(i);
     }
