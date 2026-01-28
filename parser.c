@@ -9,8 +9,6 @@ typedef struct internalCommand {
     int number;
 } command;
 
-
-
 Command get_command(int index)
 {
     return &command;
@@ -42,7 +40,7 @@ int parse (const char * filename)
 
     if(file == NULL) return 0;
 
-    fscanf(file, " %c %d", &command.var1, &commands[count].number);
+    fscanf(file, " %c %d", &command.var1, &command.number);
 
     while(fscanf(file , "%s") == 1)
     {
@@ -56,43 +54,43 @@ int parse (const char * filename)
         }
         else if(strcmp(opcode, "Inc") == 0)
         {
-            commands[count].op = INC;
+            command.op = INC;
         }
         else if(strcmp(opcode, "Dec") == 0)
         {
-            commands[count].op = DEC;
+            command.op = DEC;
         }
         else if(strcmp(opcode, "Pri") == 0)
         {
-            commands[count].op = PRI;
+            command.op = PRI;
         }
         else if(strcmp(opcode, "Add") == 0)
         {
-            commands[count].op = ADD;
+            command.op = ADD;
         }
         else if(strcmp(opcode, "Sub") == 0)
         {
-            commands[count].op = SUB;
+            command.op = SUB;
         }
         else if(strcmp(opcode, "Mul") == 0)
         {
-            commands[count].op = MUL;
+            command.op = MUL;
         }
         else if(strcmp(opcode, "And") == 0)
         {
-            commands[count].op = AND;
+            command.op = AND;
         }
         else if(strcmp(opcode, "Xor") == 0)
         {
-            commands[count].op = XOR;
+            command.op = XOR;
         }
         else if(strcmp(opcode, "Fre") == 0)
         {
-            commands[count].op = FRE;
+            command.op = FRE;
         }
         else if(strcmp(opcode, "Pra") == 0)
         {
-            commands[count].op = PRA;
+            command.op = PRA;
         }
 
         count ++;
