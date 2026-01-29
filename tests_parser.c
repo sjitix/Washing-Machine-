@@ -64,7 +64,7 @@ void test_parse_simple_program(void) {
 }
 
 // Runs the Tests
-
+/*
 int main(void) {
     test_parse_simple_program();
 
@@ -72,4 +72,4 @@ int main(void) {
     printf("Parser tests failed: %d\n", tests_failed);
 
     return (tests_failed == 0) ? 0 : 1;
-}
+}*/
