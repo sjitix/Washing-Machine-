@@ -339,3 +339,5 @@ void print_help_advice(void) {
 
 
 */
+typedef int make_iso_compilers_happy;
+
