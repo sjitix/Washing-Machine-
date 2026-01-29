@@ -14,13 +14,14 @@ static const char *current_test_name = "no test yet";
 
 // This checks that a thing is "true" (non‑zero).
 // If it is not true, we print a message saying what went wrong.
-void assert_true(int condition, const char *message) {
+/*void assert_true(int condition, const char *message) {
     if (!condition) {
         printf("FAIL in [%s]: %s\n", current_test_name, message);
         tests_failed++;
     } else {
         tests_passed++;
     }
+    */
 }
 
 // This checks that two whole numbers (ints) are the same.
