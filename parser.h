@@ -1,6 +1,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+// each command is stored as an integer
 #define MAL 0
 #define ASS 1
 #define INC 2
@@ -14,8 +15,7 @@
 #define FRE 10
 #define PRA 11
 
-
-
+// 
 typedef struct internalCommand * Command;
 
 int parse(const char * filename);
