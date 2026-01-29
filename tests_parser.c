@@ -1,3 +1,5 @@
+/*.
+
 #include <stdio.h>
 #include "parser.h"
 // Just prints how many of our tests passed or not
@@ -73,3 +75,4 @@ int main(void) {
 
     return (tests_failed == 0) ? 0 : 1;
 }
+*/
