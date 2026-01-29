@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -335,3 +336,5 @@ void print_help_advice(void) {
     printf("   * 1 = Some tests failed\n");
     printf("   * Other codes = Compilation or runtime errors\n");
 }
+
+/*
