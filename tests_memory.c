@@ -224,4 +224,6 @@ int main(void) {
     return (tests_failed == 0) ? 0 : 1;
 }
 
+
 */
+typedef int make_iso_compilers_happy;
